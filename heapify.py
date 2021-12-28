@@ -26,4 +26,20 @@ def heapSort(arr):
 print("before heapify",tree)
 heapSort(tree)
 print("after heapify",tree)
+
+'''
+to delete any element in the heap, replace it by the last element that is in the heap, then heapify that node.
+'''
+
+# for inserting a new node
+def upHeapify(arr,index):
+    parent = (index-1)//2
+    if parent>=0:
+        if arr[index]>arr[parent]:
+            swap(arr,index,parent)
+            upHeapify(arr,parent)
+
+tree.append(11)
+upHeapify(tree,len(tree)-1)
+print(tree)
         
