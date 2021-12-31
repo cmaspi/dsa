@@ -19,6 +19,34 @@ class treeNode:
         print(prefix+self.val)
         for child in self.children:
             child.printTree()
+    
+    def bfs_itr(self):
+        root = self
+        queue = []
+        queue.append(root)
+        while queue:
+            for node in queue[0].children:
+                queue.append(node)
+            print(queue[0].val)
+            queue.pop(0)
+
+# postordering
+    def dfs_recur_post(self):
+        root = self
+        ret = []
+        for node in root.children:
+            ret += node.dfs_recur_post()
+        ret += [root.val]
+        return ret
+# pretordering
+    def dfs_recur_pre(self):
+        root = self
+        ret = []
+        ret += [root.val]
+        for node in root.children:
+            ret += node.dfs_recur_pre()
+        return ret
+
 
 
 def build_product_tree():
@@ -42,7 +70,12 @@ def build_product_tree():
     root.add_child(cellphone)
     root.add_child(tv)
 
-    root.printTree()
 
+    root.printTree()
+    return root
 if __name__ == '__main__':
-    build_product_tree()
+    root = build_product_tree()
+    # print(root.bfs_itr())
+    print(root.dfs_recur_post())
+    print(root.dfs_recur_pre())
+    # root.bfs()
