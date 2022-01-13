@@ -1,4 +1,3 @@
-import time
 class Graph:
     def __init__(self, num):
         self.num = num
@@ -32,6 +31,26 @@ class Graph:
                     queue.append(s.key)
                     visited[s.key] = True
                 s= s.next
+    
+    def BFS_min_edges(self, u, v):
+        distance = [0]*self.num
+        queue = []
+        visited = [False]*self.num
+        queue.append(u)
+        while queue:
+            s = queue.pop(0)
+            dist = distance[s]
+            if s == v:
+                return dist
+            s = self.graph[s]
+            while s:
+                if not visited[s.key]:
+                    queue.append(s.key)
+                    distance[s.key] = dist+1
+                    visited[s.key] = True
+                s = s.next
+
+
 
     def DFS_util(self, index,visited=None):
         if visited is None:
@@ -62,15 +81,16 @@ class Graph:
             print()
 
 
-mygraph = Graph(5)
+mygraph = Graph(7)
 mygraph.add_edge(0,1)
-mygraph.add_edge(0, 4)
-mygraph.add_edge(1, 2)
-mygraph.add_edge(1, 3)
-mygraph.add_edge(1, 4)
-mygraph.add_edge(2, 3)
-mygraph.add_edge(3, 3)
-mygraph.add_edge(3, 4)
-mygraph.display()
-mygraph.DFS(1)
+mygraph.add_edge(0,2)
+mygraph.add_edge(0,4)
+mygraph.add_edge(1,2)
+mygraph.add_edge(2,5)
+mygraph.add_edge(3,4)
+mygraph.add_edge(4,5)
+mygraph.add_edge(4,6)
+# mygraph.display()
+# mygraph.DFS(1)
+print(mygraph.BFS_min_edges(1,6))
 # print(mygraph.graph[2].key)
